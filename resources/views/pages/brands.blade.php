@@ -65,7 +65,7 @@
                                             $count++;
                                         @endphp
                                         <tr class="odd">
-                                            <td class="dtr-control sorting_1" tabindex="0">{{ $count }}</td>
+                                            <td class="dtr-control sorting_1" tabindex="0">{{ $row->id }}</td>
                                             <td>{{ $row->brand }}</td>
                                             <td>
                                                 @if ($row->status == 1)
@@ -81,13 +81,7 @@
 
                                                 <button type="button" data-bs-toggle="modal"
                                                     data-bs-target="#deleteModal" class="btn btn-danger btn-sm mt-1"
-                                                    >Delete</button>
-
-                                                @include('elements.nova-delete-modal', [
-                                                    'route' => 'delete-brand',
-                                                    'key' => $row->id,
-                                                    'lable' => $row->brand." Brand"
-                                                ])
+                                                    onclick="setupBrandDelete('{{ $row->id }}' , '{{ $row->brand }}')">Delete</button>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -177,6 +171,13 @@
     </div>
 </div>
 
+{{-- Delete Model --}}
+@include('elements.nova-delete-modal', [
+    'route' => 'delete-brand',
+])
+
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
     integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -187,5 +188,10 @@
     function setupBrandEdit($id, $brand) {
         document.getElementById('id').value = $id;
         document.getElementById('updated_brand').value = $brand;
+    }
+
+    function setupBrandDelete($id, $brand) {
+        document.getElementById('id_key').value = $id;
+        document.getElementById('lable').innerText = $brand + " Brand";
     }
 </script>

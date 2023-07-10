@@ -3,6 +3,8 @@
     $columns = ['Id', 'Make', 'Model', 'Transmission', 'Fuel Type', 'Condition', 'Color', 'Price', 'Actions'];
 @endphp
 
+
+
 <div class="row">
     <div class="col-12">
         @if (session('status'))
@@ -126,13 +128,8 @@
 
                                                 <button type="button" data-bs-toggle="modal"
                                                     data-bs-target="#deleteModal"
+                                                    onclick="setupVehiclesDelete('{{$row->v_id}}' , '{{$row->brand}}' , '{{$row->model}}')"
                                                     class="btn btn-danger btn-sm mt-1">Delete</button>
-
-                                                @include('elements.nova-delete-modal', [
-                                                    'route' => 'delete-vehicle',
-                                                    'key' => $row->v_id,
-                                                    'lable' => $row->brand.' '.$row->model.' Vehicle',
-                                                ])
                                             </td>
                                         </tr>
                                     @endforeach
@@ -160,7 +157,8 @@
                     <div class="form-row">
                         <div class="form-group col-md-3">
                             <label for="brand">Make</label>
-                            <select name="brand" class="form-control" onchange="setupModels(this.value , 'model' , '{{ csrf_token() }}')">
+                            <select name="brand" class="form-control"
+                                onchange="setupModels(this.value , 'model' , '{{ csrf_token() }}')">
                                 @foreach ($brands as $brand)
                                     <option value="{{ $brand->brand }}">{{ $brand->brand }}</option>
                                 @endforeach
@@ -869,6 +867,10 @@
     </div>
 </div>
 
+@include('elements.nova-delete-modal', [
+    'route' => 'delete-vehicle',
+])
+
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
     integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
@@ -959,6 +961,9 @@
         //overview
         document.getElementById('overview').innerHTML = $overview;
 
+        var src = "{{ url('/storage/app/public/products-images/') }}"
+        console.log(src)
+
         //images
         $.post("/dashboard/vehicles/get_data", {
                 _token: "{{ csrf_token() }}",
@@ -998,8 +1003,9 @@
                     var img = document.createElement('img');
                     img.classList.add("brand-image");
 
-                    img.setAttribute('src', "{{ url('/assets') }}" + "/products-images/" + vehicle_images[i]
-                        .image);
+                    img.setAttribute('src',
+                        '/storage/app/public/products-images/Audi-A3-6844-2023-06-15-320.jpg'
+                    );
                     img.setAttribute('style', 'opacity: .8');
 
                     img_container.appendChild(img);
@@ -1075,5 +1081,10 @@
                     img_container.appendChild(img);
                 }
             });
+    } 
+
+    function setupVehiclesDelete($id, $brand , $model) {
+        document.getElementById('id_key').value = $id;
+        document.getElementById('lable').innerHTML = $brand+" "+$model+ " Vehicle";
     }
 </script>

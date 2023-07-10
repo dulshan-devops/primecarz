@@ -67,13 +67,8 @@
                                             <td>
                                                 <button type="button" data-bs-toggle="modal"
                                                     data-bs-target="#deleteModal"
+                                                    onclick="setupContactsDelete('{{$row->id}}' , '{{$row->email}}')"
                                                     class="btn btn-danger btn-sm mt-1">Delete</button>
-
-                                                @include('elements.nova-delete-modal', [
-                                                    'route' => 'delete-contacts',
-                                                    'key' => $row->id,
-                                                    'lable' => $row->name . ' Inquiry',
-                                                ])
                                             </td>
                                         </tr>
                                     @endforeach
@@ -87,33 +82,10 @@
     </div>
 </div>
 
-<div id="deleteContactsModal" class="modal fade">
-    <div class="modal-dialog modal-confirm">
-        <div class="modal-content">
-            <div class="modal-header flex-column">
-                <div class="icon-box">
-                    <i class="fas fa-trash-alt"></i>
-                </div>
-                <h4 class="modal-title w-100">Are you sure delete?</h4>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
-            </div>
-            <div class="modal-body">
-                <p>Do you really want to delete these <b id="lable"></b> message? This process cannot be undone.
-                </p>
-            </div>
-            <div class="modal-footer justify-content-center">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <form action="{{ route('delete-contacts') }}" method="post">
-                    @csrf
-                    {{-- hidden inputs --}}
-                    <input type="text" class="form-control" name="id" id="id" hidden required>
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                </form>
-
-            </div>
-        </div>
-    </div>
-</div>
+{{-- Delete Model --}}
+@include('elements.nova-delete-modal', [
+    'route' => 'delete-contacts',
+])
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
     integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
@@ -122,9 +94,8 @@
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 
 <script>
-    function setupContactsDelete($id, $name) {
-        document.getElementById('id').value = $id;
-
-        document.getElementById('lable').innerHTML = $name;
+    function setupContactsDelete($id, $email) {
+        document.getElementById('id_key').value = $id;
+        document.getElementById('lable').innerHTML = $email+ " Contact";
     }
 </script>

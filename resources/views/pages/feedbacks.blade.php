@@ -110,13 +110,8 @@
 
                                                 <button type="button" data-bs-toggle="modal"
                                                     data-bs-target="#deleteModal"
+                                                    onclick="setupFeedbacksDelete('{{$row->id}}' , '{{$row->customer}}')"
                                                     class="btn btn-danger btn-sm mt-1">Delete</button>
-
-                                                @include('elements.nova-delete-modal', [
-                                                    'route' => 'delete-feedback',
-                                                    'key' => $feedback->id,
-                                                    'lable' => $feedback->customer . ' Feedback',
-                                                ])
                                             </td>
                                         </tr>
                                     @endforeach
@@ -237,6 +232,11 @@
     </div>
 </div>
 
+{{-- Delete Model --}}
+@include('elements.nova-delete-modal', [
+    'route' => 'delete-feedback',
+])
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
     integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
@@ -254,5 +254,10 @@
 
         // setup customer
         document.getElementById('updated_customer').value = $customer;
+    }
+
+    function setupFeedbacksDelete($id, $customer) {
+        document.getElementById('id_key').value = $id;
+        document.getElementById('lable').innerHTML = $customer+ " Feedback";
     }
 </script>

@@ -71,13 +71,10 @@
 
                                                 <button type="button" data-bs-toggle="modal"
                                                     data-bs-target="#deleteModal"
+                                                    onclick="setupModalsDelete('{{$row->id}}' , '{{$row->model}}')"
                                                     class="btn btn-danger btn-sm mt-1">Delete</button>
 
-                                                @include('elements.nova-delete-modal', [
-                                                    'route' => 'delete-model',
-                                                    'key' => $row->id,
-                                                    'lable' => $row->brand.' '.$row->model . ' Model',
-                                                ])
+
                                             </td>
                                         </tr>
                                     @endforeach
@@ -167,6 +164,11 @@
     </div>
 </div>
 
+{{-- delete modal --}}
+@include('elements.nova-delete-modal', [
+    'route' => 'delete-model',
+])
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
     integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
@@ -182,31 +184,10 @@
 
         //brand
         document.getElementById('updated_model').value = $model;
+    }
 
-        //images preview
-        // $.post("/dashboard/models/get_data", {
-        //         _token: "{{ csrf_token() }}",
-        //         vehicle_id: $id
-        //     })
-        //     .done(function(data) {
-        //         var vehicle_images = data.vehicle_images;
-        //         var vehicle_accessories = data.vehicle_accessories;
-
-        //         //setup vehicle accessories
-
-        //         //setup vehicle images
-        //         var img_container = document.getElementById('updated_img_container');
-        //         img_container.innerHTML = '';
-        //         for (i = 0; i <= vehicle_images.length - 1; i++) {
-        //             var img = document.createElement('img');
-        //             img.classList.add("brand-image");
-
-        //             img.setAttribute('src', "{{ url('/assets') }}" + "/products-images/" + vehicle_images[i]
-        //                 .image);
-        //             img.setAttribute('style', 'opacity: .8');
-
-        //             img_container.appendChild(img);
-        //         }
-        //     });
+    function setupModalsDelete($id, $model) {
+        document.getElementById('id_key').value = $id;
+        document.getElementById('lable').innerHTML = $model+ " Modal";
     }
 </script>

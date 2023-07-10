@@ -113,7 +113,7 @@
                 <button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">
-                <p>Do you really want to delete these <b id="lable">{{$lable}}</b>? This process cannot be undone.
+                <p>Do you really want to delete these <b id="lable"></b>? This process cannot be undone.
                 </p>
             </div>
             <div class="modal-footer justify-content-center">
@@ -121,7 +121,7 @@
                 <form action="{{route($route)}}" method="post">
                     @csrf
                     {{-- hidden inputs --}}
-                    <input type="text" class="form-control" name="id_key" value="{{$key}}" hidden required>
+                    <input type="text" class="form-control" id="id_key" name="id_key" value="" hidden required>
                     <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
 

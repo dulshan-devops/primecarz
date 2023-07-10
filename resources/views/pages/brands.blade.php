@@ -65,7 +65,7 @@
                                             $count++;
                                         @endphp
                                         <tr class="odd">
-                                            <td class="dtr-control sorting_1" tabindex="0">{{ $row->id }}</td>
+                                            <td class="dtr-control sorting_1" tabindex="0">{{ $count }}</td>
                                             <td>{{ $row->brand }}</td>
                                             <td>
                                                 @if ($row->status == 1)

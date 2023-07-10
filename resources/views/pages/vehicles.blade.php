@@ -128,7 +128,7 @@
 
                                                 <button type="button" data-bs-toggle="modal"
                                                     data-bs-target="#deleteModal"
-                                                    onclick="setupVehiclesDelete('{{$row->v_id}}' , '{{$row->brand}}' , '{{$row->model}}')"
+                                                    onclick="setupVehiclesDelete('{{ $row->v_id }}' , '{{ $row->brand }}' , '{{ $row->model }}')"
                                                     class="btn btn-danger btn-sm mt-1">Delete</button>
                                             </td>
                                         </tr>
@@ -1002,9 +1002,10 @@
                 for (i = 0; i <= vehicle_images.length - 1; i++) {
                     var img = document.createElement('img');
                     img.classList.add("brand-image");
-
+                    var path = '/public/products-images/' + vehicle_images[i].image
+                    console.log(path);
                     img.setAttribute('src',
-                        '/storage/app/public/products-images/Audi-A3-6844-2023-06-15-320.jpg'
+                        path
                     );
                     img.setAttribute('style', 'opacity: .8');
 
@@ -1081,10 +1082,10 @@
                     img_container.appendChild(img);
                 }
             });
-    } 
+    }
 
-    function setupVehiclesDelete($id, $brand , $model) {
+    function setupVehiclesDelete($id, $brand, $model) {
         document.getElementById('id_key').value = $id;
-        document.getElementById('lable').innerHTML = $brand+" "+$model+ " Vehicle";
+        document.getElementById('lable').innerHTML = $brand + " " + $model + " Vehicle";
     }
 </script>

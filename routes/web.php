@@ -51,6 +51,11 @@ Route::get('/', function () {
     return view('welcome', ['recent_vehicles' => $recent_vehicles, 'brands' => $brands, 'models' => $models, 'feedbacks' => $feedbacks , 'used_vehicles' => $used_vehicles]);
 });
 
+//fetch data via JS POST
+Route::post('/dashboard/vehicles/get_data', [VehiclesController::class, 'getVehiclesData'])->name('vehicles.get_data');
+Route::post('/dashboard/models/get_data', [VehiclesController::class, 'getModelsData'])->name('models.get_data');
+Route::get('model/{name}', [VehiclesController::class, 'getModelByBrand']);
+
 //frontend pages
 Route::get('/part-exchanges', [DashboardController::class, 'viewHomePartEx'])->name('frontend-part-ex');
 Route::get('/dealer-promises', [DashboardController::class, 'viewDealerPromises'])->name('dealer-promises');
@@ -146,7 +151,4 @@ Route::middleware([
     //delete part exchange
     Route::post('/dashboard/delete-part-exchange', [PartExchangesController::class, 'deletePartEx'])->name('delete-part-ex');
 
-    //fetch data via JS POST
-    Route::post('/dashboard/vehicles/get_data', [VehiclesController::class, 'getVehiclesData'])->name('vehicles.get_data');
-    Route::post('/dashboard/models/get_data', [VehiclesController::class, 'getModelsData'])->name('models.get_data');
 });

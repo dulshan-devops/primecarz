@@ -1,24 +1,31 @@
-$(document).ready(function () {
-    $(".novaTable").DataTable();
-});
+jQuery( document ).ready(function() {
+    console.log( "Nova Development Utils Loaded" );
 
-function setupModels(brand, models_select_box , token) {
-    $.post("/dashboard/models/get_data", {
-        _token: token,
-        brand: brand,
-    }).done(function (data) {
-        //setup models select-box
-        var models = data.models;
-
-        //setup vehicle models
-        var select = document.getElementById(models_select_box);
-        select.innerHTML = "";
-        for (i = 0; i <= models.length - 1; i++) {
-            var option = document.createElement("option");
-
-            option.innerHTML = models[i].model;
-            option.setAttribute("value", models[i].model);
-            select.appendChild(option);
+    jQuery('#brand').on('change', function() {
+        var brandName = $(this).val();
+        if(brandName) {
+            jQuery.ajax({
+                url: '/model/'+brandName,
+                type: "GET",
+                dataType: "json",
+                success:function(data) {    
+                    jQuery('#model').empty();
+                    jQuery.each(data.models, function(key, value) {
+                         // Create a new option with value 'option3' and text 'Option 3'
+                        var option = jQuery('<option>', {
+                          value: value.model,
+                          text: value.model
+                        });
+                        // Append the new option to the Bootstrap-select dropdown
+                        jQuery('#model').append(option);
+                        // Refresh the Bootstrap-select dropdown to update the options
+                    });
+                    jQuery('#model').val('');
+                    jQuery('#model').selectpicker('refresh');
+                }
+            });
+        }else{
+            jQuery('#model').empty();
         }
     });
-}
+});

@@ -4,7 +4,7 @@
     'name' => 'PrimeCarz',
     'env' => 'local',
     'debug' => true,
-    'url' => 'http://127.0.0.5',
+    'url' => 'http://localhost',
     'asset_url' => NULL,
     'timezone' => 'UTC',
     'locale' => 'en',
@@ -215,7 +215,7 @@
         array (
           0 => 
           array (
-            'host' => '127.0.0.5',
+            'host' => '127.0.0.1',
             'port' => 11211,
             'weight' => 100,
           ),
@@ -288,7 +288,7 @@
       array (
         'driver' => 'mysql',
         'url' => NULL,
-        'host' => '127.0.0.5',
+        'host' => '127.0.0.1',
         'port' => '3306',
         'database' => 'primecarz',
         'username' => 'root',
@@ -308,7 +308,7 @@
       array (
         'driver' => 'pgsql',
         'url' => NULL,
-        'host' => '127.0.0.5',
+        'host' => '127.0.0.1',
         'port' => '3306',
         'database' => 'primecarz',
         'username' => 'root',
@@ -323,7 +323,7 @@
       array (
         'driver' => 'sqlsrv',
         'url' => NULL,
-        'host' => '127.0.0.5',
+        'host' => '127.0.0.1',
         'port' => '3306',
         'database' => 'primecarz',
         'username' => 'root',
@@ -345,7 +345,7 @@
       'default' => 
       array (
         'url' => NULL,
-        'host' => '127.0.0.5',
+        'host' => '127.0.0.1',
         'username' => NULL,
         'password' => NULL,
         'port' => '6379',
@@ -354,7 +354,7 @@
       'cache' => 
       array (
         'url' => NULL,
-        'host' => '127.0.0.5',
+        'host' => '127.0.0.1',
         'username' => NULL,
         'password' => NULL,
         'port' => '6379',
@@ -377,7 +377,7 @@
       array (
         'driver' => 'local',
         'root' => 'C:\\xampp\\htdocs\\primecarz-ltd\\storage\\app/public',
-        'url' => 'http://127.0.0.5/storage',
+        'url' => 'http://localhost/storage',
         'visibility' => 'public',
         'throw' => false,
       ),
@@ -711,7 +711,7 @@
       2 => '127.0.0.1',
       3 => '127.0.0.1:8000',
       4 => '::1',
-      5 => '127.0.0.5',
+      5 => 'localhost',
     ),
     'guard' => 
     array (

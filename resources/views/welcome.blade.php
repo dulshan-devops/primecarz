@@ -462,6 +462,7 @@
     <script type="text/javascript" src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/js/jquery.mobile-menu.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/js/countdown.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/nova-utils.js') }}"></script>
     <script>
         jQuery(document).ready(function() {
             jQuery('#rev_slider_4').show().revolution({

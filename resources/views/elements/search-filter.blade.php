@@ -16,9 +16,9 @@
                 <select class="selectpicker" data-width="100%" tabindex="-98" name="model" id="model"
                     >
                     <option value="">Select Model</option>
-                    @foreach ($models as $model)
+                    {{-- @foreach ($models as $model)
                         <option value="{{ $model->model }}">{{ $model->model }}</option>
-                    @endforeach
+                    @endforeach --}}
                 </select>
             </div>
             <div class="btn-group bootstrap-select">

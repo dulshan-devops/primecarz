@@ -799,11 +799,11 @@ class VehiclesController extends Controller
         return ['vehicle_images' => $vehicle_images, 'vehicle_accessories' => $accessories];
     }
 
-    public function getModelsData(Request $req)
+    public function getModelByBrand($brand , Request $req)
     {
         $models = DB::table('brands')
             ->join('models', 'brands.id', '=', 'models.b_id')
-            ->where('brands.brand', $req->brand)
+            ->where('brands.brand', $brand)
             ->select('models.*')
             ->get();
 
@@ -918,7 +918,6 @@ class VehiclesController extends Controller
 
             $vehicles = DB::table('vehicles')
                 ->where('fuel_type', '=', $req->fuel_type)
-
                 ->get();
 
             return view('pages.frontend-vehicles', ['vehicles' => $vehicles, 'brands' => $brands, 'models' => $models]);
@@ -940,6 +939,46 @@ class VehiclesController extends Controller
             $vehicles = DB::table('vehicles')
                 ->where('condition', '=', $req->condition)
                 ->where('brand', 'LIKE', $req->brand)
+                ->get();
+
+            return view('pages.frontend-vehicles', ['vehicles' => $vehicles, 'brands' => $brands, 'models' => $models]);
+        }
+
+        //brand , model , transmission , with min max prices
+        if ($req->brand != null && $req->condition == null && $req->fuel_type == null && $req->model != null && $req->min_price != null && $req->max_price != null && $req->transmission != null) {
+
+            $vehicles = DB::table('vehicles')
+                ->where('brand', 'LIKE', $req->brand)
+                ->where('model', '=', $req->model)
+                ->where('transmission', '=', $req->transmission)
+                ->whereBetween('price', [$req->min_price, $req->max_price])
+                ->get();
+
+            return view('pages.frontend-vehicles', ['vehicles' => $vehicles, 'brands' => $brands, 'models' => $models]);
+        }
+
+        //brand , model , transmission , fuel type , with min max prices
+        if ($req->brand != null && $req->condition == null && $req->fuel_type == null && $req->model != null && $req->min_price != null && $req->max_price != null && $req->transmission != null) {
+
+            $vehicles = DB::table('vehicles')
+                ->where('brand', 'LIKE', $req->brand)
+                ->where('model', '=', $req->model)
+                ->where('transmission', '=', $req->transmission)
+                ->where('fuel_type', '=', $req->fuel_type)
+                ->whereBetween('price', [$req->min_price, $req->max_price])
+                ->get();
+
+            return view('pages.frontend-vehicles', ['vehicles' => $vehicles, 'brands' => $brands, 'models' => $models]);
+        }
+
+        //brand , transmission , fuel type , with min max prices
+        if ($req->brand != null && $req->condition == null && $req->fuel_type == null && $req->model != null && $req->min_price != null && $req->max_price != null && $req->transmission != null) {
+
+            $vehicles = DB::table('vehicles')
+                ->where('brand', 'LIKE', $req->brand)
+                ->where('transmission', '=', $req->transmission)
+                ->where('fuel_type', '=', $req->fuel_type)
+                ->whereBetween('price', [$req->min_price, $req->max_price])
                 ->get();
 
             return view('pages.frontend-vehicles', ['vehicles' => $vehicles, 'brands' => $brands, 'models' => $models]);

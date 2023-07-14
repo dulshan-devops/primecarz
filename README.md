@@ -8,7 +8,7 @@
 
 </p>
 <p align="center">
-    <h1 align="center">Version : V1.0.0</h1>
+    <h2 align="center">Version : V1.0.0</h2>
 </p>
 
 ## Used Technologies - PrimeCarz Pvt (LTD)

@@ -1002,11 +1002,8 @@
                 for (i = 0; i <= vehicle_images.length - 1; i++) {
                     var img = document.createElement('img');
                     img.classList.add("brand-image");
-                    var path = '/public/products-images/' + vehicle_images[i].image
-                    console.log(path);
-                    img.setAttribute('src',
-                        path
-                    );
+                    img.setAttribute('src', "{{ url('/assets') }}" + "/products-images/" + vehicle_images[i]
+                        .image);
                     img.setAttribute('style', 'opacity: .8');
 
                     img_container.appendChild(img);

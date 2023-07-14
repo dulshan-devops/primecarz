@@ -66,28 +66,28 @@
                                         @csrf
                                         <div id="sort-by" class="row">
                                             <label class="left">Sort By: </label>
-                                            <select name="sort" id="sort_by">
-                                                <option value="brand">Make</option>
+                                            <select name="sort" id="sort_by" onchange="filterBy()">
                                                 <option value="price">Price</option>
                                                 <option value="millage">Millage</option>
                                                 <option value="transmission">Transmission</option>
                                                 <option value="fuel_type">Fuel Type</option>
                                                 <option value="color">Color</option>
+                                                <option value="brand">Make</option>
                                             </select>
 
                                             <select name="order" id="order_by" onchange="filterBy()">
-                                                <option value="ASC">select order</option>
+                                                <option selected value="DESC">DESC</option>
                                                 <option value="ASC">ASC</option>
-                                                <option value="DESC">DESC</option>
                                             </select>
                                         </div>
                                         <div class="pager">
                                             <div id="limiter">
                                                 <label>Show: </label>
-                                                <select name="paginate" id="paginate" style="width: 90px;" onchange="filterBy()">
+                                                <select name="paginate" id="paginate" style="width: 90px;"
+                                                    onchange="filterBy()">
                                                     <option value="2">2</option>
                                                     <option value="5">5</option>
-                                                    <option value="10">10</option>
+                                                    <option selected value="10">10</option>
                                                     <option value="15">15</option>
                                                     <option value="25">25</option>
                                                     <option value="50">50</option>
@@ -100,7 +100,7 @@
                                 <div class="row">
                                     <div class="vehicle-header">
                                         <h1>All cars for sale in Prime Carz</h1>
-                                        
+
                                         <p>MH Quality Motors are a used car dealer based in Leicester, Leicestershire.
                                             We offer quality used cars at affordable prices.
                                             For more information on any of the vehicles below please contact us on
@@ -120,8 +120,8 @@
                                             <h3>Sorry no vehicles found</h3>
                                             <p>The vehicle may have been sold or removed from our website. Please try
                                                 another search or return to the main vehicle page</p>
-                                            <p>Take me back to the <a
-                                                    href="{{route('vehicles')}}" style="color:DodgerBlue">vehicles page</a></p>
+                                            <p>Take me back to the <a href="{{ route('vehicles') }}"
+                                                    style="color:DodgerBlue">vehicles page</a></p>
 
                                         </center>
                                     @else
@@ -267,7 +267,7 @@
                                     @endif
 
                                 </div>
-                                <div class="toolbar bottom">
+                                {{-- <div class="toolbar bottom">
 
                                     <div class="pager">
                                         <div class="pages">                                            
@@ -276,7 +276,7 @@
                                     </div>
 
                                     
-                                </div>
+                                </div> --}}
 
                             </article>
                         </div>
@@ -334,6 +334,7 @@
     <script type="text/javascript" src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/js/jquery.mobile-menu.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/js/countdown.js') }}"></script>
+    {{-- <script type="text/javascript" src="{{ asset('assets/js/nova-utils.js') }}"></script> --}}
 
     <script>
         jQuery(document).ready(function() {
@@ -419,6 +420,40 @@
         function filterBy() {
             document.getElementById("sort_form").submit();
         }
+    </script>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            console.log("Nova Development Utils Loaded");
+
+            jQuery('#brand').on('change', function() {
+                var brandName = $(this).val();
+                if (brandName) {
+                    jQuery.ajax({
+                        url: '/model/' + brandName,
+                        type: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            jQuery('#model').empty();
+                            jQuery.each(data.models, function(key, value) {
+                                // Create a new option with value 'option3' and text 'Option 3'
+                                var option = jQuery('<option>', {
+                                    value: value.model,
+                                    text: value.model
+                                });
+                                // Append the new option to the Bootstrap-select dropdown
+                                jQuery('#model').append(option);
+                                // Refresh the Bootstrap-select dropdown to update the options
+                            });
+                            jQuery('#model').val('');
+                            jQuery('#model').selectpicker('refresh');
+                        }
+                    });
+                } else {
+                    jQuery('#model').empty();
+                }
+            });
+        });
     </script>
 
 </body>

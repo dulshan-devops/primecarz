@@ -33,8 +33,8 @@ class DashboardController extends Controller
     public function viewAllVehicles(Request $req)
     {
         $paginate = empty($req->paginate) ? 5 : $req->paginate;
-        $sort = empty($req->sort) ? "brand" : $req->sort;
-        $order = empty($req->order) ? "ASC" : $req->order;
+        $sort = empty($req->sort) ? "price" : $req->sort;
+        $order = empty($req->order) ? "DESC" : $req->order;
 
         $vehicles = DB::table('vehicles')
             ->select('vehicles.*')

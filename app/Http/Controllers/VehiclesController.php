@@ -799,7 +799,7 @@ class VehiclesController extends Controller
         return ['vehicle_images' => $vehicle_images, 'vehicle_accessories' => $accessories];
     }
 
-    public function getModelByBrand($brand , Request $req)
+    public function getModelByBrand($brand, Request $req)
     {
         $models = DB::table('brands')
             ->join('models', 'brands.id', '=', 'models.b_id')
@@ -857,7 +857,6 @@ class VehiclesController extends Controller
 
             return view('pages.frontend-vehicles', ['vehicles' => $vehicles, 'brands' => $brands, 'models' => $models]);
         }
-
         //   1.2 : brand with transmission
         if ($req->brand != null && $req->model == null &&  $req->transmission != null && $req->fuel_type == null) {
 
@@ -903,6 +902,17 @@ class VehiclesController extends Controller
             return view('pages.frontend-vehicles', ['vehicles' => $vehicles, 'brands' => $brands, 'models' => $models]);
         }
 
+        //   1.5 : brand , model  with min,max prices
+        if ($req->brand != null && $req->model != null &&  $req->transmission == null && $req->min_price != null && $req->max_price != null) {
+
+            $vehicles = DB::table('vehicles')
+                ->where('brand', '=', $req->brand)
+                ->where('model', '=', $req->model)
+                ->whereBetween('price', [$req->min_price, $req->max_price])
+                ->get();
+
+            return view('pages.frontend-vehicles', ['vehicles' => $vehicles, 'brands' => $brands, 'models' => $models]);
+        }
         // 2 : only transmission
         if ($req->transmission != null && $req->model == null && $req->min_price == null && $req->brand == null && $req->fuel_type == null) {
 
@@ -912,7 +922,6 @@ class VehiclesController extends Controller
 
             return view('pages.frontend-vehicles', ['vehicles' => $vehicles, 'brands' => $brands, 'models' => $models]);
         }
-
         // 3 : only fuel type
         if ($req->fuel_type != null && $req->model == null && $req->min_price == null && $req->brand == null && $req->transmission == null) {
 
@@ -932,7 +941,6 @@ class VehiclesController extends Controller
 
             return view('pages.frontend-vehicles', ['vehicles' => $vehicles, 'brands' => $brands, 'models' => $models]);
         }
-
         // 4 : only with brand and conditions
         if ($req->brand != null && $req->condition != null && $req->fuel_type == null && $req->model == null &&  $req->min_price == null && $req->transmission == null) {
 
@@ -943,7 +951,6 @@ class VehiclesController extends Controller
 
             return view('pages.frontend-vehicles', ['vehicles' => $vehicles, 'brands' => $brands, 'models' => $models]);
         }
-
         //brand , model , transmission , with min max prices
         if ($req->brand != null && $req->condition == null && $req->fuel_type == null && $req->model != null && $req->min_price != null && $req->max_price != null && $req->transmission != null) {
 
@@ -956,9 +963,8 @@ class VehiclesController extends Controller
 
             return view('pages.frontend-vehicles', ['vehicles' => $vehicles, 'brands' => $brands, 'models' => $models]);
         }
-
         //brand , model , transmission , fuel type , with min max prices
-        if ($req->brand != null && $req->condition == null && $req->fuel_type == null && $req->model != null && $req->min_price != null && $req->max_price != null && $req->transmission != null) {
+        if ($req->brand != null && $req->condition == null && $req->fuel_type != null && $req->model != null && $req->min_price != null && $req->max_price != null && $req->transmission != null) {
 
             $vehicles = DB::table('vehicles')
                 ->where('brand', 'LIKE', $req->brand)
@@ -970,7 +976,20 @@ class VehiclesController extends Controller
 
             return view('pages.frontend-vehicles', ['vehicles' => $vehicles, 'brands' => $brands, 'models' => $models]);
         }
+        //brand , model , transmission , fuel type , condition with min max prices
+        if ($req->brand != null && $req->condition != null && $req->fuel_type != null && $req->model != null && $req->min_price != null && $req->max_price != null && $req->transmission != null) {
 
+            $vehicles = DB::table('vehicles')
+                ->where('brand', 'LIKE', $req->brand)
+                ->where('model', '=', $req->model)
+                ->where('transmission', '=', $req->transmission)
+                ->where('fuel_type', '=', $req->fuel_type)
+                ->where('condition', '=', $req->condition)
+                ->whereBetween('price', [$req->min_price, $req->max_price])
+                ->get();
+
+            return view('pages.frontend-vehicles', ['vehicles' => $vehicles, 'brands' => $brands, 'models' => $models]);
+        }
         //brand , transmission , fuel type , with min max prices
         if ($req->brand != null && $req->condition == null && $req->fuel_type == null && $req->model != null && $req->min_price != null && $req->max_price != null && $req->transmission != null) {
 
@@ -990,9 +1009,9 @@ class VehiclesController extends Controller
 
     public function orderVehicles(Request $req)
     {
-        $paginate = empty($req->paginate) ? 5 : $req->paginate;
-        $sort = empty($req->sort) ? 'ASC' : $req->sort;
-        $order = empty($req->order) ? 'brand' : $req->order;
+        $paginate = empty($req->paginate) ? 10 : $req->paginate;
+        $sort = empty($req->sort) ? 'DESC' : $req->sort;
+        $order = empty($req->order) ? 'price' : $req->order;
 
         $vehicles = DB::table('vehicles')
             ->select('vehicles.*')

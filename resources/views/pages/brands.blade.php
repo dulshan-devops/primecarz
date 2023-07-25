@@ -140,7 +140,7 @@
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Update Make</h1>
             </div>
             <div class="modal-body">
-                <form method="post" action="{{ route('update-brand') }}" enctype="multipart/form-data">
+                <form method="post" action="{{ route('update-brand') }}">
                     @csrf
                     <div class="form-row">
                         <div class="form-group col-md-12">

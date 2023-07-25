@@ -29,13 +29,15 @@ Route::get('/', function () {
 
     $brands = DB::table('brands')
         ->select('brands.*')
+        ->where('brands.status' , 1)
         ->orderBy('brands.brand', 'ASC')
         ->get();
 
-    $models = DB::table('models')
-        ->select('models.*')
-        ->orderBy('models.model', 'ASC')
-        ->get();
+    // $models = DB::table('models')
+    //     ->select('models.*')
+    //     ->where('models.status' , 1)
+    //     ->orderBy('models.model', 'ASC')
+    //     ->get();
 
     $feedbacks = DB::table('feedbacks')
         ->join('vehicles', 'feedbacks.v_id', '=', 'vehicles.id')
@@ -45,10 +47,11 @@ Route::get('/', function () {
     $used_vehicles = DB::table('vehicles')
         ->select('vehicles.*')
         ->where('condition' , '=' , 0)
+        ->where('vehicles.status' , 1)
         ->orderBy('vehicles.brand', 'ASC')
         ->get();
 
-    return view('welcome', ['recent_vehicles' => $recent_vehicles, 'brands' => $brands, 'models' => $models, 'feedbacks' => $feedbacks , 'used_vehicles' => $used_vehicles]);
+    return view('welcome', ['recent_vehicles' => $recent_vehicles, 'brands' => $brands, 'feedbacks' => $feedbacks , 'used_vehicles' => $used_vehicles]);
 });
 
 //fetch data via JS POST

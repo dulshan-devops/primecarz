@@ -197,7 +197,7 @@
       'file' => 
       array (
         'driver' => 'file',
-        'path' => 'C:\\xampp\\htdocs\\primecarz-ltd\\storage\\framework/cache/data',
+        'path' => 'C:\\xampp\\htdocs\\primecarz\\storage\\framework/cache/data',
       ),
       'memcached' => 
       array (
@@ -370,13 +370,13 @@
       'local' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\xampp\\htdocs\\primecarz-ltd\\storage\\app',
+        'root' => 'C:\\xampp\\htdocs\\primecarz\\storage\\app',
         'throw' => false,
       ),
       'public' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\xampp\\htdocs\\primecarz-ltd\\storage\\app/public',
+        'root' => 'C:\\xampp\\htdocs\\primecarz\\storage\\app/public',
         'url' => 'http://localhost/storage',
         'visibility' => 'public',
         'throw' => false,
@@ -396,7 +396,7 @@
     ),
     'links' => 
     array (
-      'C:\\xampp\\htdocs\\primecarz-ltd\\public\\storage' => 'C:\\xampp\\htdocs\\primecarz-ltd\\storage\\app/public',
+      'C:\\xampp\\htdocs\\primecarz\\public\\storage' => 'C:\\xampp\\htdocs\\primecarz\\storage\\app/public',
     ),
   ),
   'fortify-options' => 
@@ -520,13 +520,13 @@
       'single' => 
       array (
         'driver' => 'single',
-        'path' => 'C:\\xampp\\htdocs\\primecarz-ltd\\storage\\logs/laravel.log',
+        'path' => 'C:\\xampp\\htdocs\\primecarz\\storage\\logs/laravel.log',
         'level' => 'debug',
       ),
       'daily' => 
       array (
         'driver' => 'daily',
-        'path' => 'C:\\xampp\\htdocs\\primecarz-ltd\\storage\\logs/laravel.log',
+        'path' => 'C:\\xampp\\htdocs\\primecarz\\storage\\logs/laravel.log',
         'level' => 'debug',
         'days' => 14,
       ),
@@ -578,7 +578,7 @@
       ),
       'emergency' => 
       array (
-        'path' => 'C:\\xampp\\htdocs\\primecarz-ltd\\storage\\logs/laravel.log',
+        'path' => 'C:\\xampp\\htdocs\\primecarz\\storage\\logs/laravel.log',
       ),
     ),
   ),
@@ -644,7 +644,7 @@
       'theme' => 'default',
       'paths' => 
       array (
-        0 => 'C:\\xampp\\htdocs\\primecarz-ltd\\resources\\views/vendor/mail',
+        0 => 'C:\\xampp\\htdocs\\primecarz\\resources\\views/vendor/mail',
       ),
     ),
   ),
@@ -750,7 +750,7 @@
     'lifetime' => '120',
     'expire_on_close' => false,
     'encrypt' => false,
-    'files' => 'C:\\xampp\\htdocs\\primecarz-ltd\\storage\\framework/sessions',
+    'files' => 'C:\\xampp\\htdocs\\primecarz\\storage\\framework/sessions',
     'connection' => NULL,
     'table' => 'sessions',
     'store' => NULL,
@@ -770,14 +770,14 @@
   array (
     'paths' => 
     array (
-      0 => 'C:\\xampp\\htdocs\\primecarz-ltd\\resources\\views',
+      0 => 'C:\\xampp\\htdocs\\primecarz\\resources\\views',
     ),
-    'compiled' => 'C:\\xampp\\htdocs\\primecarz-ltd\\storage\\framework\\views',
+    'compiled' => 'C:\\xampp\\htdocs\\primecarz\\storage\\framework\\views',
   ),
   'livewire' => 
   array (
     'class_namespace' => 'App\\Http\\Livewire',
-    'view_path' => 'C:\\xampp\\htdocs\\primecarz-ltd\\resources\\views/livewire',
+    'view_path' => 'C:\\xampp\\htdocs\\primecarz\\resources\\views/livewire',
     'layout' => 'layouts.app',
     'asset_url' => NULL,
     'app_url' => NULL,
@@ -886,7 +886,7 @@
     array (
     ),
     'enable_runnable_solutions' => NULL,
-    'remote_sites_path' => 'C:\\xampp\\htdocs\\primecarz-ltd',
+    'remote_sites_path' => 'C:\\xampp\\htdocs\\primecarz',
     'local_sites_path' => '',
     'housekeeping_endpoint_prefix' => '_ignition',
     'settings_file_path' => '',

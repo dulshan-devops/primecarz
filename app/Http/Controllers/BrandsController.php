@@ -34,7 +34,7 @@ class BrandsController extends Controller
             'updated_status' => ['required'],
         ],);
 
-        //update new brand name
+        //update new brand 
         DB::table('brands')
             ->where('id', $req->id)
             ->update([

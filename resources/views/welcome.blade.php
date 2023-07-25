@@ -152,7 +152,6 @@
 
 
             <!--Category silder End-->
-
             <div id="top">
                 <div class="container">
                     <div class="row">

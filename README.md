@@ -1,4 +1,4 @@
-<p align="center"><a href="http://primecarz.co.uk" target="_blank"><img src="http://primecarz.co.uk/assets/images/Prime%20Carz%20Ltd.png" width="200" alt="Laravel Logo"></a></p> 
+<p align="center"><a href="http://primecarz.co.uk" target="_blank"><img src="https://github.com/dulshan-devops/primecarz/blob/master/public/assets/images/Prime%20Carz%20Ltd.png?raw=true" width="200" alt="Laravel Logo"></a></p> 
 
 <p align="center">
 <a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
@@ -22,11 +22,6 @@ Primecarz pvt ltd is vehicle and parts exchanging online platform in UK.
 - Admin LTE 
 - Jquerry
 
-## BUGS
-
-- admin dashboard activate-deacticate switch not working
-
-
 ## Sponsors
 
-Thank you for considering contributing to the Ozen Web Solutions.
+Thank you for considering contributing to Ozen Web Solutions PVT LTD.
